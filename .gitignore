@@ -1,0 +1,9 @@
+/db
+/incremental_db
+/output_files
+/simulation
+/nios_led3_top.v.bak
+/.qsys_edit
+/software
+/nios_led3/.qsys_edit
+/nios_led3/nios_led3
