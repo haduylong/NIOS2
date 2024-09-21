@@ -46,7 +46,9 @@ Các thư mục test còn lại chứa các file driver và chương trình test
 
 ## Demo
 <div style="display:flex">
-  <img style="" src="" alt="demo"/>
+  <a href="https://drive.google.com/file/d/1DC7gNLvT7M9WNpuosnxbI-GAWMZ_esHR/view?usp=sharing">
+  <img style="" src="assets/images/demo_image.png" alt="demo"/>
+  </a>
 </div>
 
 ## Các công cụ
