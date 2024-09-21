@@ -29,19 +29,19 @@ và hiển thị thời gain trên các thanh LED 7 đoạn. Nội dung công vi
 ### Platform design để cấu hình các module
 Chi tiết trong file cấu hình <a href="nios_led3/nios_led3.qsys">nios_led3.qsys</a>
 <div style="display:flex">
-  <img style="" src="" alt="platform design"/>
-  <img style="" src="" alt="platform design"/>
+  <img style="" src="assets/images/platform_design_1.png" alt="platform design"/>
+  <img style="" src="assets/images/platform_design_2.png" alt="platform design"/>
 </div>
 
 ### Top module
 <div style="display:flex">
-  <img style="" src="" alt="top module"/>
+  <img style="" src="assets/images/top_module.png" alt="top module"/>
 </div>
-Cấu hình các cổng vào ra trong <a href="nios_led3/nios_led3_pin_assigment.csv">nios_led3_pin_assigment.csv</a>
+Cấu hình các cổng vào ra trong <a href="nios_led3_pin_assigment.csv">nios_led3_pin_assigment.csv</a>
 
 ## Xây dựng phần mềm
-Trong [nios_led3/software](nios_led3/software) gồm các thư mục <a href="nios_led3/software/led3_bsp">led3_bsp</a> chứa các thông tin vè board phục vụ phát triển phần mềm.
-các thư mục test còn lại chứa các file driver và chương trình test. Trong đó <a href="nios_led3/software/led3_test_isr">led3_test_isr</a> sử dụng ngắt với "context", 
+Trong [nios_led3/software](nios_led3/software) gồm các thư mục <a href="nios_led3/software/led3_bsp">led3_bsp</a> chứa các thông tin về board phục vụ phát triển phần mềm.
+Các thư mục test còn lại chứa các file driver và chương trình test. Trong đó <a href="nios_led3/software/led3_test_isr">led3_test_isr</a> sử dụng ngắt với "context", 
 <a href="nios_led3/software/led3_test_isr_v2">led3_test_isr_v2</a> sử dụng ngắt với global variables.
 
 ## Demo
@@ -56,8 +56,11 @@ các thư mục test còn lại chứa các file driver và chương trình test
   <li>DE10-Lite (MAX10 10M50DAF484C7G)</li>
 </ul>
 <div style="display:flex">
-  <img style="" src="" alt="board"/>
+  <img style="display: block;margin-left: auto;margin-right: auto;width:60%" src="assets/images/DE10_Lite.jpg" alt="board"/>
 </div>
+
+## Cài đặt
+Tham khảo: [https://youtu.be/XprMl1q_Srk?si=1r7ImX1thikUSuKd](https://youtu.be/XprMl1q_Srk?si=1r7ImX1thikUSuKd)
 
 
 
