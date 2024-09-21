@@ -111,31 +111,37 @@ void sseg_disp_msg_v1(alt_u32 sseg_base, cmd_type cmd){
 }
 
 /*****************************************************************************
- * funtion: led_flash_isr
- * purpose: toggle 2 led; each isr check if tick >= prd, toggle led
- * arguments:
- * 		ctxt: isr for flash led
- * 		id:
- * return:
- * note:
- * 		cmd passed within context
- *
- *****************************************************************************/
+* function: led_flash_v4
+* purpose: toggle 2 LEDs according to the given interval
+* arguments:
+* 		led_base: base address of LED
+* 		cmd: commend
+* return:
+*****************************************************************************/
 void led_flash_v4(alt_u32 led_base, cmd_type cmd){
 	static alt_u8 led_ptn = 0x01;
 	static int last = 0;
 
-	if(cmd.pause)
+	if(cmd.pause)							// no toggle if pause is asserted
 		return;
 
-	if((sys_ms_tick - last) < cmd.prd)
+	if((sys_ms_tick - last) < cmd.prd)		// intercal not reached
 		return;
 
-	sys_ms_tick = 0;
-	led_ptn = led_ptn ^ 0x03;
-	pio_write(ctxt1->led_base, led_ptn);
+	last = sys_ms_tick;
+	led_ptn = led_ptn ^ 0x03;				// toggle 2 LEDs
+	pio_write(led_base, led_ptn);			// write LEDs
 }
 
+
+/*****************************************************************************
+* function: ms_clock_isr
+* purpose: isr for ms clock tick
+* arguments:
+* 	context:
+* 	id:
+* return:
+******************************************************************************/
 static void ms_clock_isr(void* context, alt_u32 id){
 	// clear interrupt
 	timer_clear_tick(isr_timer_base);
@@ -143,6 +149,10 @@ static void ms_clock_isr(void* context, alt_u32 id){
 	sys_ms_tick++;
 }
 
+/*****************************************************************************
+* function: main()
+* purpose: flasing LED using ISR with global variables
+*****************************************************************************/
 int main(){
 	cmd_type cmd = {0, 100}; // not pause; 100ms interval
 
@@ -151,7 +161,7 @@ int main(){
 
 	// alt_irq_register(USR_TIMER_IRQ, (void *) &ctxt1, led_flash_isr); // legacy
 	alt_ic_isr_register(USR_TIMER_IRQ_INTERRUPT_CONTROLLER_ID,
-						USR_TIMER_IRQ, (void *) led_flash_isr,
+						USR_TIMER_IRQ, (void *) ms_clock_isr,
 						NULL, 0x0); // enhanced
 	while(1){
 		sw_get_command_v1(BTN_BASE, SWITCH_BASE, &cmd);
@@ -160,3 +170,8 @@ int main(){
 		led_flash_v4(LEDR_BASE, cmd);
 	}
 }
+
+
+/*
+Mỗi khi đếm xong vd:1s thì kích hoạt ngắt tăng tick
+*/

@@ -144,6 +144,11 @@ static void led_flash_isr(void* ctxt, alt_u32 id){
 	}
 }
 
+
+/*****************************************************************************
+* function: main()
+* purpose: flasing LED using ISR with "context" argument
+*****************************************************************************/
 int main(){
 	cmd_type cmd = {0, 100}; // not pause; 100ms interval
 	ctext1_type ctxt1;
